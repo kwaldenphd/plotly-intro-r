@@ -5,13 +5,27 @@ This tutorial is licensed under a <a href="http://creativecommons.org/licenses/b
 
 ## Lab Goals
 
-Static visualizations, like those produced by ggplot, provide a wealth of information, but don’t allow the viewer to actively interact with the data. This isn’t a problem if the visualization is to be printed in a report or on a poster, but it can be a limitation if the visual is to be used during a presentation, hosted on a webpage, or incorporated into an R Shiny application.
+Static visualizations, like those produced by `ggplot2`, provide a wealth of information, but don’t allow the viewer to actively interact with the data. This isn’t a problem if the visualization is to be printed in a report or on a poster, but it can be a limitation if the visual is to be used during a presentation, hosted on a webpage, or incorporated into an R Shiny application.
 
 ## Acknowledgements
 
 This lab procedure is adapted from and based on Ryan Miller's ["Interactive and Animated Graphics Using plotly"](https://remiller1450.github.io/s230f19/plotly.html) (Fall 2019, Intro to Data Science STA 230 course, Grinnell College).
 
 # Table of Contents
+
+- [What is `plotly`?](#what-is-plotly)
+- [Data and Environment Setup](#data-and-environment-setup)
+  * [Packages](#packages)
+  * [Data](#data)
+- [Getting Started With `ggplotly`](#getting-started-with-ggplotly)
+  * [`ggplotly` Package](#ggplotly-package)
+  * [`plotly` Basics](#plotly-basics)
+  * [Custom Hover Labels](#custom-hover-labels)
+  * [Animations](#animations)
+  * [OPTIONAL: 3D Graphics](#optional-3d-graphics)
+- [Additional Resources](#additional-resources)
+- [Additional Questions](#additional-questions)
+- [Lab Notebook Questions](#lab-notebook-questions)
 
 # What is `plotly`?
 
@@ -21,15 +35,15 @@ This lab procedure is adapted from and based on Ryan Miller's ["Interactive and 
 
 “With ggplotly() by Plotly, you can convert your ggplot2 figures into interactive ones powered by plotly.js” [[Plotly ggplot2 Library]](https://plotly.com/ggplot2/)
 
-The graphics package plotly is an open-source interactive graphing tool that interfaces with R and ggplot. 
+The graphics package `plotly` is an open-source interactive graphing tool that interfaces with `R` and `ggplot`. 
 
-Graphics created using the plotly package are compatible with existing tools like R Markdown and R Shiny, allowing for easy publishing and sharing.
+Graphics created using the `plotly` package are compatible with existing tools like R Markdown and R Shiny, allowing for easy publishing and sharing.
 
 # Data and Environment Setup
 
 ## Packages
 
-We'll be using a number of tidyverse packages in this lab.
+We'll be using a number of `tidyverse` packages in this lab.
 - [`plotly`](https://plotly.com/r/getting-started/) "is an R package for creating interactive web-based graphs via the open source JavaScript graphing library plotly.js"
 - [`ggplot2`](https://ggplot2.tidyverse.org/) "is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details."
 - [`tidyr`](https://tidyr.tidyverse.org/) "provides a set of functions that help you get to tidy data"
@@ -54,14 +68,22 @@ These packages are part of what is known as "the Tidyverse," in the RStudio user
 
 According to https://www.tidyverse.org/, "the tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures."
 
-To install and load all packages that are part of the tidyverse core, you can install the parent tidyverse package.
+To install and load all packages that are part of the `tidyverse` core, you can install the parent tidyverse package.
 
 ```R
 install.package("tidyverse")
 library(tidyverse)
 ```
 
-As of December 2020, the tidyverse core incldues the following packages: ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats.
+As of December 2020, the `tidyverse` core incldues the following packages: 
+- `ggplot2`
+- `dplyr`
+- `tidyr`
+- `readr`
+- `purrr`
+- `tibble`
+- `stringr`
+- `forcats`
 
 ## Data
 
@@ -81,11 +103,11 @@ AmesHousing <- read.csv("https://raw.githubusercontent.com/kwaldenphd/plotly-int
 
 ### `ggplotly` package
 
-Before learning any of the syntax used by plotly, we’ll first use the package to add interactivity to an existing graphic created by ggplot. 
+Before learning any of the syntax used by `plotly`, we’ll first use the package to add interactivity to an existing graphic created by `ggplot`. 
 
-The ggplotly function accepts any ggplot object and renders it into an interactive graphic.
+The `ggplotly` function accepts any `ggplot` object and renders it into an interactive graphic.
 
-In the example below, we create a simple scatterplot describing the Ames Housing data, then make it interactive with the ggplotly function. 
+In the example below, we create a simple scatterplot describing the Ames Housing data, then make it interactive with the `ggplotly` function. 
 
 You should notice two key features have been added to the plot:
 - A dashboard that allows users to zoom in/out and rescale the plot.
@@ -116,26 +138,26 @@ You now see building type, in addition to x-y coordinates, when you hover over a
 
 # `plotly` basics
 
-ggplotly is a simple and effective way to augment an existing ggplot graphic, but in order to access the more advanced features of plotly we’ll need to construct graphics from scratch using the plot_ly function.
+`ggplotly` is a simple and effective way to augment an existing `ggplot` graphic, but in order to access the more advanced features of plotly we’ll need to construct graphics from scratch using the `plot_ly` function.
 
-The code below illustrates one way to create our previous scatterplot using plot_ly:
+The code below illustrates one way to create our previous scatterplot using `plot_ly`:
 ```R
 plot_ly(data = AmesHousing, type = "scatter",  mode = "markers", x = ~GrLivArea, y = ~SalePrice, color = ~BldgType)
 ```
 
 FIGURE 3
 
-Here, the argument type = "scatter" tells plotly to create a scatterplot, and the argument mode = "markers" plots the data-points as hoverable dots (rather than text labels or other characters).
+Here, the argument `type = "scatter"` tells plotly to create a scatterplot, and the argument `mode = "markers"` plots the data-points as hoverable dots (rather than text labels or other characters).
 
-You might also notice the ∼ character used in front of the variables we reference in the x, y, and color arguments. 
+You might also notice the `∼` character used in front of the variables we reference in the `x`, `y`, and `color` arguments. 
 
-This character tells plot_ly to look for that variable inside of the data.frame supplied in the data argument. 
+This character tells `plot_ly` to look for that variable inside of the data.frame supplied in the `data` argument. 
 
-Had we omitted it, plot_ly would look for vectors with those names in our global R environment.
+Had we omitted it, `plot_ly` would look for vectors with those names in our global `R` environment.
 
-Similar to ggplot, we can build-up plot_ly graphics by adding layers, though this time layers are added using the %>% operator. 
+Similar to `ggplot`, we can build-up `plot_ly` graphics by adding layers, though this time layers are added using the `%>%` operator. 
 
-In the example below, we add a scatterplot layer using a trace with type = "scatter", we then add another layer of lines to the plot (for illustration, this second layer of lines doesn’t have any practical use):
+In the example below, we add a scatterplot layer using a trace with `type = "scatter"`, we then add another layer of lines to the plot (for illustration, this second layer of lines doesn’t have any practical use):
 
 ```R
 plot_ly(data = AmesHousing) %>% 
@@ -145,19 +167,19 @@ plot_ly(data = AmesHousing) %>%
 
 FIGURE 4
 
-To see the full range of plotly trace options (valid inputs to the type argument) visit [the reference page](https://plot.ly/r/reference/). 
+To see the full range of `plotly` `trace` options (valid inputs to the type argument) visit [the reference page](https://plot.ly/r/reference/). 
 
 The different options appear in the navigation panel on the left side of the page, you can click on the type of graph you’re interested in to jump to that section of the documentation.
 
-Question #1: Create an R Markdown document and delete the existing sections/code chunks, then add a section (defined by ## Question 1). In a code chunk within this section, load the AmesHousing data and use plotly to create a violin plot displaying the distribution of sale prices for each different house style in the Ames housing data. (Hint: you should use the reference page to learn how to add a violin plot trace).
+<blockquote>Q1: Create an R Markdown document and delete the existing sections/code chunks, then add a section (defined by ## Question 1). In a code chunk within this section, load the AmesHousing data and use plotly to create a violin plot displaying the distribution of sale prices for each different house style in the Ames housing data. (Hint: you should use the reference page to learn how to add a violin plot trace).</blockquote>
 
 # Custom Hover Labels
 
-The labels that appear when you hover over a data-point are one of the most useful features of plotly. 
+The labels that appear when you hover over a data-point are one of the most useful features of `plotly`. 
 
-They can be controlled via the text argument, which can be given within the plot_ly function, or within add_trace. 
+They can be controlled via the `text` argument, which can be given within the `plot_ly` function, or within `add_trace`. 
 
-In the example below, we label each home sale using its property id (PID):
+In the example below, we label each home sale using its property id (`PID`):
 ```R
 plot_ly(data = AmesHousing, type = "scatter",
         x = ~GrLivArea, y = ~SalePrice, color = ~BldgType,
@@ -166,7 +188,7 @@ plot_ly(data = AmesHousing, type = "scatter",
 
 FIGURE 5
 
-plotly labels are constructed using hypertext markup langauage, or HTML, meaning we can customize their appearance using HTML commands:
+`plotly` labels are constructed using hypertext markup langauage, or `HTML`, meaning we can customize their appearance using HTML markup:
 
 ```R
 plot_ly(data = AmesHousing, type = "scatter",
@@ -176,20 +198,25 @@ plot_ly(data = AmesHousing, type = "scatter",
 
 FIGURE 6
 
-The paste0 function is used to combine character strings and variable values into a single string. 
+The `paste0` function is used to combine character strings and variable values into a single string. 
 
 The text “<br>” is the HTML code to begin a new line. 
 
-A few other useful HTML commands are:
-- <b> my text <b> - Bolds the text in between the tags
-- <i> my text <i> - Italicizes the text in between the tags
-- x<sub>i<sub> - Adds a subscript, in this case we get x*i*
+A few other useful HTML tags:
+
+Tag | Explanation
+--- | ---
+`< b > my text < / b >` | Bolds the text in between the tags
+`< i > my text < / i >` | Italicizes the text in between the tags
+` x < sub > i < / sub >` | Adds a subscript, in this case we get x<sub>i</sub>
 
 Along with “<br>”, the commands indicated above are the most common HTML commands that you might use in label. 
 
 If your desired labels require something else, [Stanford's HTML cheatsheet](https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf) is a useful place to start.
 
-Something you might have noticed is that our custom text was added to default hover info. If we wanted to only include our custom label, and not the default information, we could use the argument hoverinfo = "text":
+Something you might have noticed is that our custom text was added to default hover info. 
+
+If we wanted to only include our custom label, and not the default information, we could use the argument `hoverinfo = "text"`:
 
 ```R
 plot_ly(data = AmesHousing, type = "scatter",
@@ -198,11 +225,7 @@ plot_ly(data = AmesHousing, type = "scatter",
         text = ~paste("This home was built in:", YearBuilt, "<br>", "It was last sold in:", YrSold))
 ```
 
-Question #2:
-
-The code below uses plotly to create a piechart of different house styles. Notice what happens when you click on a category in the chart’s legend!
-
-For Question #2, modify this code to include custom hovertext displaying the house style and that style’s median sale price on separate lines. (Hint: you should use the group_by and summarize functions in the dplyr package to get the information needed for your labels)
+<blockquote>Q2: The code below uses `plotly` to create a piechart of different house styles. Notice what happens when you click on a category in the chart’s legend! Modify this code to include custom hovertext displaying the house style and that style’s median sale price on separate lines. (Hint: you should use the group_by and summarize functions in the dplyr package to get the information needed for your labels).</blockquote>
 
 ```R
 prop = table(AmesHousing$HouseStyle)/nrow(AmesHousing)
@@ -212,123 +235,6 @@ plot_ly() %>%
   add_trace(type = "pie", labels = ~style, values = ~prop, textinfo = "percent")
 ```
 FIGURE 7
-
-# 3D Graphics
-
-plotly allows us to graph in three-dimensions, something that ggplot cannot accommodate. 
-
-The code below creates a simple 3D scatterplot:
-
-```R
-plot_ly(data = AmesHousing, type = "scatter3d", mode = "markers",
-        x = ~GrLivArea, y = ~SalePrice, z = ~OverallQual)
-```
-
-FIGURE 8
-
-plotly can also display surfaces. 
-
-The code below displays the estimated two-dimensional density of overall quality and year built:
-
-```R
-#install.packages("MASS")
-library(MASS)
-kd <- kde2d(AmesHousing$YearBuilt, AmesHousing$OverallQual, n = 50)
-
-plot_ly() %>% add_surface(x = ~kd$x, y = ~kd$y, z = ~kd$z, showscale = FALSE) %>% 
-  layout(scene = list(xaxis = list(title = "Year Built"), 
-                      yaxis = list(title = "Overall Quality"), 
-                      zaxis = list(title = "Density")))
-```
-
-FIGURE 9
-
-In this example, we see that changing the labels of axes in plotly is quite cumbersome, requiring the use of nested lists within the layout function. 
-
-In order to reduce the amount code that is shown, the remaining examples in this tutorial will not format labels of axes or scales. 
-
-However, you should always neatly format your axes and labels when using plotly on a project.
-
-Perhaps more useful than 3D representations of two-dimensional densities are fitted regression planes:
-
-```R
-model <- lm(SalePrice ~ YearBuilt + OverallQual, data = AmesHousing)
-
-xs <- seq(1900, 2020, by = 10)
-ys <- seq(1,10, by = 1)
-grid <- expand.grid(xs,ys)
-names(grid) <- c("YearBuilt", "OverallQual")
-z <- predict(model, newdata = grid)
-m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
-
-plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
-  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("blue"))
-```
-
-FIGURE 10
-
-The code used to create this plot seems pretty complicated, but it isn’t too difficult to understand with some explanation.
-
-To begin, plotly creates a surface using a grid of x-y coordinates and a matrix of heights (z coordinates). 
-
-In the z matrix, the element in position {i,j}
-corresponds with the height of the surface at the location defined by xi and yj, the respective ith and jth elements of the x and y vectors.
-
-For us to use this information to construct the regression plane, we first created sequences of x and y values that we wanted to plot over. 
-
-We then used the expand.grid function to create matrix containing all possible pairing of these values, as we needed heights for each x-y coordinate. 
-
-We used the predict function to obtain model predictions for each of these possible x-y pairings, storing the predictions in a matrix with appropriate dimensions (such that position {i,j} contains the height that plotly is expecting).
-
-The code provided above is pretty general and can be easily adapted to different applications simply by changing the variable names and the sequences of values that are plotted over.
-
-Looking more closely at this regression plane, you’ll notice that the effects of year and quality on sale price don’t appear to be linear. 
-
-Fortunately, we can use the same general procedure to plot the prediction surface of nearly any model.
-
-The plot below displays what the regression surface looks like using a generalized additive model (GAM), a type of model that adds flexibility to allow non-linear relationships between predictors and the outcome using splines:
-
-```R
-# install.packages("splines")
-# install.packages("mgcv")
-
-library(splines)
-library(mgcv)
-model <- gam(SalePrice ~ s(YearBuilt) + s(OverallQual), data = AmesHousing)
-
-xs <- seq(1900, 2020, by = 10)
-ys <- seq(1,10, by = 1)
-grid <- expand.grid(xs,ys)
-names(grid) <- c("YearBuilt", "OverallQual")
-z <- predict(model, newdata = grid)
-m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
-
-plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
-  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, color = I("red"))
-```
-
-FIGURE 11
-
-Within the gam function, you’ll notice that predictors are specified within the s function, which specifies that spline should be used to smooth the relationship between that predictor and the outcome (see the presentation on smoothing if this doesn’t sound familiar).
-
-Question 3:
-
-Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. 
-
-Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.
-
-```R
-model <- lm(SalePrice ~ YearBuilt + OverallQual, data = AmesHousing)
-xs <- seq(1900, 2020, by = 10)
-ys <- seq(1,10, by = 1)
-grid <- expand.grid(xs,ys)
-names(grid) <- c("YearBuilt", "OverallQual")
-z <- predict(model, newdata = grid)
-m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
-
-plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
-  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("green"))
-```
 
 # Animations
 
@@ -381,21 +287,146 @@ The redraw = FALSE argument can improve the performance of laggy animations by n
 
 However, in this example, it doesn’t make much difference.
 
-# Practice Problem
+# Additional Resources
 
-Question #4:
+Additional `plotly` resources:
+- plotly, ["R Figure Reference: Single Page"](https://plot.ly/r/reference/): A reference guide for different plotly traces and the attributes you can modify. Very useful for learning things like “how to not display the percentages on my piechart?” or “how to plot text instead of points on a scatterplot?”
+- Carson Sievert, [*Interactive web-based visualization with R, plotly, and shiny*](https://plotly-r.com/) (CRC Press, 2019).
+- plotly, ["Plotly R Open Source Graphing Library"](https://plotly.com/r/): A library of examples for many different types of plotly graphics
 
-The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
+# Additional Questions
+
+Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
 
 ```R
 shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
 ```
-# Additional Resources
 
-plotly, ["R Figure Reference: Single Page"](https://plot.ly/r/reference/): A reference guide for different plotly traces and the attributes you can modify. Very useful for learning things like “how to not display the percentages on my piechart?” or “how to plot text instead of points on a scatterplot?”
+# OPTIONAL: 3D Graphics
 
-Carson Sievert, [*Interactive web-based visualization with R, plotly, and shiny*](https://plotly-r.com/) (CRC Press, 2019).
+`plotly` allows us to graph in three-dimensions, something that `ggplot` cannot accommodate. 
 
-plotly, ["Plotly R Open Source Graphing Library"](https://plotly.com/r/): A library of examples for many different types of plotly graphics
+The code below creates a simple 3D scatterplot:
+
+```R
+plot_ly(data = AmesHousing, type = "scatter3d", mode = "markers",
+        x = ~GrLivArea, y = ~SalePrice, z = ~OverallQual)
+```
+
+FIGURE 8
+
+`plotly` can also display surfaces. 
+
+The code below displays the estimated two-dimensional density of overall quality and year built:
+
+```R
+#install.packages("MASS")
+library(MASS)
+kd <- kde2d(AmesHousing$YearBuilt, AmesHousing$OverallQual, n = 50)
+
+plot_ly() %>% add_surface(x = ~kd$x, y = ~kd$y, z = ~kd$z, showscale = FALSE) %>% 
+  layout(scene = list(xaxis = list(title = "Year Built"), 
+                      yaxis = list(title = "Overall Quality"), 
+                      zaxis = list(title = "Density")))
+```
+
+FIGURE 9
+
+In this example, we see that changing the labels of axes in `plotly` is quite cumbersome, requiring the use of nested lists within the layout function. 
+
+In order to reduce the amount code that is shown, the remaining examples in this tutorial will not format axis labels or scales. 
+
+However, you should always neatly format your axes and labels when using `plotly` on a project.
+
+Perhaps more useful than 3D representations of two-dimensional densities are fitted regression planes:
+
+```R
+model <- lm(SalePrice ~ YearBuilt + OverallQual, data = AmesHousing)
+
+xs <- seq(1900, 2020, by = 10)
+
+ys <- seq(1,10, by = 1)
+
+grid <- expand.grid(xs,ys)
+
+names(grid) <- c("YearBuilt", "OverallQual")
+
+z <- predict(model, newdata = grid)
+
+m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
+
+plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
+  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("blue"))
+```
+
+FIGURE 10
+
+Let's walk through this line by line.
+
+To begin, `plotly` creates a surface using a grid of x-y coordinates and a matrix of heights (z coordinates). 
+
+In the z matrix, the element in position `{i,j}` corresponds with the height of the surface at the location defined by `xi` and `yj`, the respective `ith` and `jth` elements of the x and y vectors.
+
+For us to use this information to construct the regression plane, we first created sequences of x and y values that we wanted to plot over. 
+
+We then used the `expand.grid` function to create matrix containing all possible pairing of these values, as we needed heights for each x-y coordinate. 
+
+We used the `predict` function to obtain model predictions for each of these possible x-y pairings, storing the predictions in a matrix with appropriate dimensions (such that position `{i,j}` contains the height that plotly is expecting).
+
+The code provided above is pretty general and can be easily adapted to different applications simply by changing the variable names and the sequences of values that are plotted over.
+
+Looking more closely at this regression plane, you’ll notice that the effects of year and quality on sale price don’t appear to be linear. 
+
+Fortunately, we can use the same general procedure to plot the prediction surface of nearly any model.
+
+The plot below displays what the regression surface looks like using a generalized additive model (GAM), a type of model that adds flexibility to allow non-linear relationships between predictors and the outcome using splines:
+
+```R
+# install.packages("splines")
+# install.packages("mgcv")
+
+library(splines)
+library(mgcv)
+model <- gam(SalePrice ~ s(YearBuilt) + s(OverallQual), data = AmesHousing)
+
+xs <- seq(1900, 2020, by = 10)
+ys <- seq(1,10, by = 1)
+grid <- expand.grid(xs,ys)
+names(grid) <- c("YearBuilt", "OverallQual")
+z <- predict(model, newdata = grid)
+m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
+
+plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
+  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, color = I("red"))
+```
+
+FIGURE 11
+
+Within the `gam` function, you’ll notice that predictors are specified within the `s` function, which specifies that spline should be used to smooth the relationship between that predictor and the outcome (see the presentation on smoothing if this doesn’t sound familiar).
+
+<blockquote>QA: Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.</blockquote>
+
+```R
+model <- lm(SalePrice ~ YearBuilt + OverallQual, data = AmesHousing)
+xs <- seq(1900, 2020, by = 10)
+ys <- seq(1,10, by = 1)
+grid <- expand.grid(xs,ys)
+names(grid) <- c("YearBuilt", "OverallQual")
+z <- predict(model, newdata = grid)
+m <- matrix(z, nrow = length(unique(grid$YearBuilt)), ncol = length(unique(grid$OverallQual)))
+
+plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#000000")) %>% 
+  add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("green"))
+```
 
 # Lab Notebook Questions
+
+Q1: Create an R Markdown document and delete the existing sections/code chunks, then add a section (defined by ## Question 1). In a code chunk within this section, load the AmesHousing data and use plotly to create a violin plot displaying the distribution of sale prices for each different house style in the Ames housing data. (Hint: you should use the reference page to learn how to add a violin plot trace).
+
+Q2: The code below uses `plotly` to create a piechart of different house styles. Notice what happens when you click on a category in the chart’s legend! Modify this code to include custom hovertext displaying the house style and that style’s median sale price on separate lines. (Hint: you should use the group_by and summarize functions in the dplyr package to get the information needed for your labels).
+
+Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
+
+```R
+shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
+```
