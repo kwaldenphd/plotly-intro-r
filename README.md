@@ -120,7 +120,7 @@ my_ggplot <- ggplot(data=AmesHousing) + geom_point(mapping= aes(x=GrLivArea, y=S
 ggplotly(my_ggplot)
 ```
 
-FIGURE 1
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_1.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_1.png?raw=true" /></a></p>
 
 Let’s now add some complexity and color each data-point by building type:
 
@@ -130,7 +130,7 @@ my_ggplot <- ggplot(data=AmesHousing) + geom_point(mapping= aes(x=GrLivArea, y=S
 ggplotly(my_ggplot)
 ```
 
-FIGURE 2
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_2.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_2.png?raw=true" /></a></p>
 
 You can click on a building type in the legend to remove that category of data-points from the plot.
 
@@ -145,7 +145,7 @@ The code below illustrates one way to create our previous scatterplot using `plo
 plot_ly(data = AmesHousing, type = "scatter",  mode = "markers", x = ~GrLivArea, y = ~SalePrice, color = ~BldgType)
 ```
 
-FIGURE 3
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_3.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_3.png?raw=true" /></a></p>
 
 Here, the argument `type = "scatter"` tells plotly to create a scatterplot, and the argument `mode = "markers"` plots the data-points as hoverable dots (rather than text labels or other characters).
 
@@ -165,7 +165,7 @@ plot_ly(data = AmesHousing) %>%
   add_lines(x = ~GrLivArea, y = ~SalePrice, color = ~BldgType) 
 ```
 
-FIGURE 4
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_4.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_4.png?raw=true" /></a></p>
 
 To see the full range of `plotly` `trace` options (valid inputs to the type argument) visit [the reference page](https://plot.ly/r/reference/). 
 
@@ -186,7 +186,7 @@ plot_ly(data = AmesHousing, type = "scatter",
         text = ~PID)
 ```
 
-FIGURE 5
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_5.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_5.png?raw=true" /></a></p>
 
 `plotly` labels are constructed using hypertext markup langauage, or `HTML`, meaning we can customize their appearance using HTML markup:
 
@@ -196,11 +196,11 @@ plot_ly(data = AmesHousing, type = "scatter",
         text = ~paste0("This home was built in: ", YearBuilt, "<br> It was last sold in: ", YrSold))
 ```
 
-FIGURE 6
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_6.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_6.png?raw=true" /></a></p>
 
 The `paste0` function is used to combine character strings and variable values into a single string. 
 
-The text “<br>” is the HTML code to begin a new line. 
+The text `< br >` is the HTML code to begin a new line. 
 
 A few other useful HTML tags:
 
@@ -210,7 +210,7 @@ Tag | Explanation
 `< i > my text < / i >` | Italicizes the text in between the tags
 ` x < sub > i < / sub >` | Adds a subscript, in this case we get x<sub>i</sub>
 
-Along with “<br>”, the commands indicated above are the most common HTML commands that you might use in label. 
+Along with ` < br >`, the commands indicated above are the most common HTML commands that you might use in label. 
 
 If your desired labels require something else, [Stanford's HTML cheatsheet](https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf) is a useful place to start.
 
@@ -234,7 +234,7 @@ style = names(prop)
 plot_ly() %>%
   add_trace(type = "pie", labels = ~style, values = ~prop, textinfo = "percent")
 ```
-FIGURE 7
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_7.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_7.png?raw=true" /></a></p>
 
 # Animations
 
@@ -273,7 +273,7 @@ plot_ly(data = AmesHousing, type = "scatter", mode = "markers",
    animation_opts(frame = 1000, easing = "elastic", redraw = FALSE)
 ```
 
-FIGURE 13
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_13.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_13.png?raw=true" /></a></p>
 
 This example also illustrates a couple of additional animation features, which are modified using the animation_opts function:
 
@@ -287,21 +287,6 @@ The redraw = FALSE argument can improve the performance of laggy animations by n
 
 However, in this example, it doesn’t make much difference.
 
-# Additional Resources
-
-Additional `plotly` resources:
-- plotly, ["R Figure Reference: Single Page"](https://plot.ly/r/reference/): A reference guide for different plotly traces and the attributes you can modify. Very useful for learning things like “how to not display the percentages on my piechart?” or “how to plot text instead of points on a scatterplot?”
-- Carson Sievert, [*Interactive web-based visualization with R, plotly, and shiny*](https://plotly-r.com/) (CRC Press, 2019).
-- plotly, ["Plotly R Open Source Graphing Library"](https://plotly.com/r/): A library of examples for many different types of plotly graphics
-
-# Additional Questions
-
-Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
-
-```R
-shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
-```
-
 # OPTIONAL: 3D Graphics
 
 `plotly` allows us to graph in three-dimensions, something that `ggplot` cannot accommodate. 
@@ -313,7 +298,7 @@ plot_ly(data = AmesHousing, type = "scatter3d", mode = "markers",
         x = ~GrLivArea, y = ~SalePrice, z = ~OverallQual)
 ```
 
-FIGURE 8
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_8.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_8.png?raw=true" /></a></p>
 
 `plotly` can also display surfaces. 
 
@@ -330,7 +315,7 @@ plot_ly() %>% add_surface(x = ~kd$x, y = ~kd$y, z = ~kd$z, showscale = FALSE) %>
                       zaxis = list(title = "Density")))
 ```
 
-FIGURE 9
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_9.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_9.png?raw=true" /></a></p>
 
 In this example, we see that changing the labels of axes in `plotly` is quite cumbersome, requiring the use of nested lists within the layout function. 
 
@@ -359,7 +344,7 @@ plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#0000
   add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("blue"))
 ```
 
-FIGURE 10
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_10.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_10.png?raw=true" /></a></p>
 
 Let's walk through this line by line.
 
@@ -400,11 +385,11 @@ plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#0000
   add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, color = I("red"))
 ```
 
-FIGURE 11
+<p align="center"><a href="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_11.png?raw=true"><img class="aligncenter" src="https://github.com/kwaldenphd/plotly-intro-r/blob/main/figures/Figure_11.png?raw=true" /></a></p>
 
 Within the `gam` function, you’ll notice that predictors are specified within the `s` function, which specifies that spline should be used to smooth the relationship between that predictor and the outcome (see the presentation on smoothing if this doesn’t sound familiar).
 
-<blockquote>QA: Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.</blockquote>
+<blockquote>Q4: Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.</blockquote>
 
 ```R
 model <- lm(SalePrice ~ YearBuilt + OverallQual, data = AmesHousing)
@@ -419,6 +404,21 @@ plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#0000
   add_markers(x = ~AmesHousing$YearBuilt, y = ~AmesHousing$OverallQual, z = ~AmesHousing$SalePrice, colors = I("green"))
 ```
 
+# Additional Resources
+
+Additional `plotly` resources:
+- plotly, ["R Figure Reference: Single Page"](https://plot.ly/r/reference/): A reference guide for different plotly traces and the attributes you can modify. Very useful for learning things like “how to not display the percentages on my piechart?” or “how to plot text instead of points on a scatterplot?”
+- Carson Sievert, [*Interactive web-based visualization with R, plotly, and shiny*](https://plotly-r.com/) (CRC Press, 2019).
+- plotly, ["Plotly R Open Source Graphing Library"](https://plotly.com/r/): A library of examples for many different types of plotly graphics
+
+# Additional Questions
+
+Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
+
+```R
+shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
+```
+
 # Lab Notebook Questions
 
 Q1: Create an R Markdown document and delete the existing sections/code chunks, then add a section (defined by ## Question 1). In a code chunk within this section, load the AmesHousing data and use plotly to create a violin plot displaying the distribution of sale prices for each different house style in the Ames housing data. (Hint: you should use the reference page to learn how to add a violin plot trace).
@@ -430,3 +430,5 @@ Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikiped
 ```R
 shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
 ```
+
+***optional*** Q4: Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.
