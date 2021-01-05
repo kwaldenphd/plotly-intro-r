@@ -27,6 +27,8 @@ This lab procedure is adapted from and based on Ryan Miller's ["Interactive and 
 - [Additional Questions](#additional-questions)
 - [Lab Notebook Questions](#lab-notebook-questions)
 
+[Click here](https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/plotly-intro-r-markdown.Rmd) and select the "Save as" option to download this lab as an R Markdown file.
+
 # What is `plotly`?
 
 1. “plotly is an R package for creating interactive web-based graphs via the open source JavaScript graphing library plotly.js” [[Getting Started with Plotly in R]](https://plotly.com/r/getting-started/)
