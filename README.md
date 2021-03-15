@@ -7,6 +7,8 @@ This tutorial is licensed under a <a href="http://creativecommons.org/licenses/b
 
 Static visualizations, like those produced by `ggplot2`, provide a wealth of information, but don’t allow the viewer to actively interact with the data. This isn’t a problem if the visualization is to be printed in a report or on a poster, but it can be a limitation if the visual is to be used during a presentation, hosted on a webpage, or incorporated into an R Shiny application.
 
+[Link to lab overview video](https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=1b4a7a2c-fd00-490e-b20d-acec0036394b) (Panopto, ND users).
+
 ## Acknowledgements
 
 This lab procedure is adapted from and based on Ryan Miller's ["Interactive and Animated Graphics Using plotly"](https://remiller1450.github.io/s230f19/plotly.html) (Fall 2019, Intro to Data Science STA 230 course, Grinnell College).
