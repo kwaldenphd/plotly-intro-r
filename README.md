@@ -27,7 +27,7 @@ This lab procedure is adapted from and based on Ryan Miller's ["Interactive and 
 - [Additional Questions](#additional-questions)
 - [Lab Notebook Questions](#lab-notebook-questions)
 
-[Click here](https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/plotly-intro-r-markdown.Rmd) and select the "Save as" option to download this lab as an R Markdown file.
+[Click here](https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/sport-data/sport-data-plotly-intro-r-markdown.Rmd) and select the "Save as" option to download this lab as an R Markdown file.
 
 # What is `plotly`?
 
