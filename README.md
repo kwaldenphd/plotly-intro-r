@@ -7,6 +7,8 @@ This tutorial is licensed under a <a href="http://creativecommons.org/licenses/b
 
 Static visualizations, like those produced by `ggplot2`, provide a wealth of information, but don’t allow the viewer to actively interact with the data. This isn’t a problem if the visualization is to be printed in a report or on a poster, but it can be a limitation if the visual is to be used during a presentation, hosted on a webpage, or incorporated into an R Shiny application.
 
+[Link to lab overview video](https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=1b4a7a2c-fd00-490e-b20d-acec0036394b) (Panopto, ND users).
+
 ## Acknowledgements
 
 This lab procedure is adapted from and based on Ryan Miller's ["Interactive and Animated Graphics Using plotly"](https://remiller1450.github.io/s230f19/plotly.html) (Fall 2019, Intro to Data Science STA 230 course, Grinnell College).
@@ -27,7 +29,7 @@ This lab procedure is adapted from and based on Ryan Miller's ["Interactive and 
 - [Additional Questions](#additional-questions)
 - [Lab Notebook Questions](#lab-notebook-questions)
 
-[Click here](https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/plotly-intro-r-markdown.Rmd) and select the "Save as" option to download this lab as an R Markdown file.
+[Click here](https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/sport-data/sport-data-plotly-intro-r-markdown.Rmd) and select the "Save as" option to download this lab as an R Markdown file.
 
 # What is `plotly`?
 
@@ -417,11 +419,7 @@ plot_ly() %>% add_surface(x = ~xs, y = ~ys, z = ~m, colors = c("#d1d1d1", "#0000
 
 # Additional Questions
 
-Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
-
-```R
-shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
-```
+Q3: Load a sport-focused data set of your choosing into RStudio. For this question you should create a plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
 
 # Lab Notebook Questions
 
@@ -429,10 +427,6 @@ Q1: Create an R Markdown document and delete the existing sections/code chunks, 
 
 Q2: The code below uses `plotly` to create a piechart of different house styles. Notice what happens when you click on a category in the chart’s legend! Modify this code to include custom hovertext displaying the house style and that style’s median sale price on separate lines. (Hint: you should use the group_by and summarize functions in the dplyr package to get the information needed for your labels).
 
-Q3: The code below loads a dataset compiled by [Mother Jones](https://en.wikipedia.org/wiki/Mother_Jones_(magazine)) documenting mass shootings in the United States. For this question you should create an animated plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
-
-```R
-shootings <- read.csv('https://raw.githubusercontent.com/kwaldenphd/plotly-intro-r/main/data/MassShootings.csv')
-```
+Q3: Load a sport-focused data set of your choosing into RStudio. For this question you should create a plot of your choosing that highlights something you deem to be an important or interesting trend in these data.
 
 ***optional*** Q4: Modify the code given below to display the linear regression model that predicts SalePrice using linear regression model with LotArea and GrLivArea as predictors. Note that you’ll need to change how the xs and ys sequences are defined, as well as many of the variable names that are referenced.
